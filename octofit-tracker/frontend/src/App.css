@@ -1,0 +1,81 @@
+.app-shell {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.app-eyebrow,
+.resource-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.app-subtitle {
+  max-width: 40rem;
+}
+
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.nav-link {
+  color: var(--text-h);
+  text-decoration: none;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--social-bg);
+}
+
+.nav-link:hover,
+.nav-link-active {
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.resource-view {
+  display: grid;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.resource-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+}
+
+.status-text {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .app-header,
+  .app-main {
+    padding: 1.25rem;
+  }
+}
