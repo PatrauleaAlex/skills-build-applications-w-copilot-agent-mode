@@ -5,6 +5,10 @@ import {
   normalizeCollectionResponse,
 } from '../config/api.js'
 
+const leaderboardApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  : getCollectionApiUrl('leaderboard')
+
 function Leaderboard() {
   const [entries, setEntries] = useState([])
   const [error, setError] = useState('')
@@ -18,7 +22,7 @@ function Leaderboard() {
       setError('')
 
       try {
-        const response = await fetch(getCollectionApiUrl('leaderboard'))
+        const response = await fetch(leaderboardApiUrl)
 
         if (!response.ok) {
           throw new Error(`Unable to load leaderboard: ${response.status}`)
@@ -55,7 +59,7 @@ function Leaderboard() {
           <p className="resource-kicker">API collection</p>
           <h2>Leaderboard</h2>
         </div>
-        <code>{getCollectionApiUrl('leaderboard')}</code>
+        <code>{leaderboardApiUrl}</code>
       </div>
 
       {loading ? <p className="status-text">Loading leaderboard...</p> : null}

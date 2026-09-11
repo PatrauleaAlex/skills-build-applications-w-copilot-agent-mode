@@ -5,6 +5,10 @@ import {
   normalizeCollectionResponse,
 } from '../config/api.js'
 
+const usersApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+  : getCollectionApiUrl('users')
+
 function Users() {
   const [users, setUsers] = useState([])
   const [error, setError] = useState('')
@@ -18,7 +22,7 @@ function Users() {
       setError('')
 
       try {
-        const response = await fetch(getCollectionApiUrl('users'))
+        const response = await fetch(usersApiUrl)
 
         if (!response.ok) {
           throw new Error(`Unable to load users: ${response.status}`)
@@ -55,7 +59,7 @@ function Users() {
           <p className="resource-kicker">API collection</p>
           <h2>Users</h2>
         </div>
-        <code>{getCollectionApiUrl('users')}</code>
+        <code>{usersApiUrl}</code>
       </div>
 
       {loading ? <p className="status-text">Loading users...</p> : null}

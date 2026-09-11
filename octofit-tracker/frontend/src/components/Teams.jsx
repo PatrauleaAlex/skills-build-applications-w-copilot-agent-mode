@@ -5,6 +5,10 @@ import {
   normalizeCollectionResponse,
 } from '../config/api.js'
 
+const teamsApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  : getCollectionApiUrl('teams')
+
 function Teams() {
   const [teams, setTeams] = useState([])
   const [error, setError] = useState('')
@@ -18,7 +22,7 @@ function Teams() {
       setError('')
 
       try {
-        const response = await fetch(getCollectionApiUrl('teams'))
+        const response = await fetch(teamsApiUrl)
 
         if (!response.ok) {
           throw new Error(`Unable to load teams: ${response.status}`)
@@ -55,7 +59,7 @@ function Teams() {
           <p className="resource-kicker">API collection</p>
           <h2>Teams</h2>
         </div>
-        <code>{getCollectionApiUrl('teams')}</code>
+        <code>{teamsApiUrl}</code>
       </div>
 
       {loading ? <p className="status-text">Loading teams...</p> : null}

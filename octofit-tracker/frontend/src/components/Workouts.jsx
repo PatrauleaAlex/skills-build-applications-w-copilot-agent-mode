@@ -5,6 +5,10 @@ import {
   normalizeCollectionResponse,
 } from '../config/api.js'
 
+const workoutsApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+  : getCollectionApiUrl('workouts')
+
 function Workouts() {
   const [workouts, setWorkouts] = useState([])
   const [error, setError] = useState('')
@@ -18,7 +22,7 @@ function Workouts() {
       setError('')
 
       try {
-        const response = await fetch(getCollectionApiUrl('workouts'))
+        const response = await fetch(workoutsApiUrl)
 
         if (!response.ok) {
           throw new Error(`Unable to load workouts: ${response.status}`)
@@ -55,7 +59,7 @@ function Workouts() {
           <p className="resource-kicker">API collection</p>
           <h2>Workouts</h2>
         </div>
-        <code>{getCollectionApiUrl('workouts')}</code>
+        <code>{workoutsApiUrl}</code>
       </div>
 
       {loading ? <p className="status-text">Loading workouts...</p> : null}

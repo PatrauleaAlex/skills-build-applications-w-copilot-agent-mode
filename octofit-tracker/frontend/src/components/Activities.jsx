@@ -5,6 +5,10 @@ import {
   normalizeCollectionResponse,
 } from '../config/api.js'
 
+const activitiesApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  : getCollectionApiUrl('activities')
+
 function Activities() {
   const [activities, setActivities] = useState([])
   const [error, setError] = useState('')
@@ -18,7 +22,7 @@ function Activities() {
       setError('')
 
       try {
-        const response = await fetch(getCollectionApiUrl('activities'))
+        const response = await fetch(activitiesApiUrl)
 
         if (!response.ok) {
           throw new Error(`Unable to load activities: ${response.status}`)
@@ -55,7 +59,7 @@ function Activities() {
           <p className="resource-kicker">API collection</p>
           <h2>Activities</h2>
         </div>
-        <code>{getCollectionApiUrl('activities')}</code>
+        <code>{activitiesApiUrl}</code>
       </div>
 
       {loading ? <p className="status-text">Loading activities...</p> : null}
